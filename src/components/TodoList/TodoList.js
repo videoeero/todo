@@ -1,15 +1,17 @@
 import React, { useState, useEffect, createRef } from "react";
 
+import "./TodoList.scss";
+
 const TodoList = () => {
   const [todoData, setTodoData] = useState([]);
 
   const newTodoInput = createRef();
 
   useEffect(() => {
-    getData();
+    getTodoData();
   }, []);
 
-  const getData = () => {
+  const getTodoData = () => {
     fetch("/data/todos.json", {
       headers: {
         "Content-Type": "application/json",
@@ -37,8 +39,8 @@ const TodoList = () => {
   };
 
   const deleteTodo = (itemIndexToRemoved) => {
-    const filteredTodoList = todoData.filter(function (value, index, arr) {
-      return index != itemIndexToRemoved;
+    const filteredTodoList = todoData.filter((value, index) => {
+      return index !== itemIndexToRemoved;
     });
 
     setTodoData(filteredTodoList);
@@ -46,6 +48,18 @@ const TodoList = () => {
 
   const editTodo = (index) => {
     console.log(todoData[index]);
+  };
+
+  const toggleTodoDone = (item, index) => {
+    console.log("toggling!");
+
+    const updatedItemStatus = { ...item, status: !item.status };
+
+    const newList = todoData.map((x, i) => {
+      return i == index ? updatedItemStatus : x;
+    });
+
+    setTodoData(newList);
   };
 
   return (
@@ -56,9 +70,19 @@ const TodoList = () => {
       </div>
 
       <ul>
+        {console.log(todoData)}
         {todoData.map((item, index) => (
           <li key={index}>
-            {item.task}
+            <button
+              onClick={() => {
+                toggleTodoDone(item, index);
+              }}
+            >
+              Check
+            </button>
+            <span className={!item.status ? "item_false" : "item_true"}>
+              {item.task}
+            </span>
             <button
               onClick={() => {
                 editTodo(index);
