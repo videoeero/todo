@@ -1,0 +1,24 @@
+{
+  "todos": [
+    {
+      "task": "Buy ice cream",
+      "status": false
+    },
+    {
+      "task": "Feed the dog",
+      "status": false
+    },
+    {
+      "task": "Call mom",
+      "status": false
+    },
+    {
+      "task": "Have a lunch",
+      "status": false
+    },
+    {
+      "task": "Buy movie tickets",
+      "status": false
+    }
+  ]
+}
