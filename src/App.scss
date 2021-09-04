@@ -1,0 +1,23 @@
+.App {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+}
+
+ul {
+  border: 2px solid grey;
+  padding: 30px;
+
+  li {
+    * {
+      margin: 0 10px;
+    }
+  }
+}
+
+button {
+  padding: 10px;
+}
