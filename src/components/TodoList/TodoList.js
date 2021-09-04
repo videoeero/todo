@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createRef } from "react";
 
 const TodoList = () => {
   const [todoData, setTodoData] = useState([]);
+
+  const newTodoInput = createRef();
 
   useEffect(() => {
     getData();
@@ -24,16 +26,57 @@ const TodoList = () => {
       });
   };
 
+  const addNewTodo = () => {
+    const newTodolist = [
+      ...todoData,
+      { task: newTodoInput.current.value, status: false },
+    ];
+
+    setTodoData(newTodolist);
+    newTodoInput.current.value = "";
+  };
+
+  const deleteTodo = (itemIndexToRemoved) => {
+    const filteredTodoList = todoData.filter(function (value, index, arr) {
+      return index != itemIndexToRemoved;
+    });
+
+    setTodoData(filteredTodoList);
+  };
+
+  const editTodo = (index) => {
+    console.log(todoData[index]);
+  };
+
   return (
-    <ul>
-      {todoData.map((item, index) => (
-        <li>
-          {item.task}
-          <button>Edit</button>
-          <button>Delete</button>
-        </li>
-      ))}
-    </ul>
+    <>
+      <div>
+        <input ref={newTodoInput} type="text" />
+        <button onClick={addNewTodo}>Add new todo</button>
+      </div>
+
+      <ul>
+        {todoData.map((item, index) => (
+          <li key={index}>
+            {item.task}
+            <button
+              onClick={() => {
+                editTodo(index);
+              }}
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => {
+                deleteTodo(index);
+              }}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 
