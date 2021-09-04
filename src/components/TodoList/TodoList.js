@@ -1,4 +1,12 @@
 import React, { useState, useEffect, createRef } from "react";
+import addNewTodo from "../../utils/addNewTodo";
+import deleteTodo from "../../utils/deleteTodo";
+import toggleTodoDone from "../../utils/toggleTodoDone";
+import updateTodoTask from "../../utils/updateTodoTask";
+
+import TodoItemEditMode from "../TodoItemEditMode/TodoItemEditMode";
+import TodoItem from "../TodoItem/TodoItem";
+import NewTodoInput from "../NewTodoInput/NewTodoInput";
 
 import "./TodoList.scss";
 
@@ -12,6 +20,7 @@ const TodoList = () => {
   const [editTodoInput, setEditTodoInput] = useState(null);
 
   useEffect(() => {
+    console.log("App was rendered!");
     getTodoData();
   }, []);
 
@@ -23,63 +32,40 @@ const TodoList = () => {
       },
     })
       .then(function (response) {
-        console.log(response);
         return response.json();
       })
       .then(function (resultData) {
-        console.log(resultData.todos);
         setTodoData(resultData.todos);
       });
   };
 
-  const addNewTodo = () => {
-    const newTodolist = [
-      ...todoData,
-      { task: newTodoInput.current.value, status: false },
-    ];
-
-    setTodoData(newTodolist);
+  const handleAddNewTodo = () => {
+    setTodoData(addNewTodo(todoData, newTodoInput.current.value));
     newTodoInput.current.value = "";
   };
 
-  const deleteTodo = (itemIndexToRemoved) => {
-    const filteredTodoList = todoData.filter((value, index) => {
-      return index !== itemIndexToRemoved;
-    });
-
-    setTodoData(filteredTodoList);
+  const handleDeleteTodo = (itemIndexToRemoved) => {
+    setTodoData(deleteTodo(todoData, itemIndexToRemoved));
   };
 
-  const editTodo = (index) => {
-    console.log(todoData[index]);
+  const editThisTodo = (index) => {
     setEditMode(index);
   };
 
-  const toggleTodoDone = (item, index) => {
-    console.log("toggling!");
-
-    const updatedItemStatus = { ...item, status: !item.status };
-
-    const newList = todoData.map((originalItem, i) => {
-      return i === index ? updatedItemStatus : originalItem;
-    });
-    setTodoData(newList);
+  const cancelEdit = () => {
+    setEditMode(false);
   };
 
-  const updateTodoTask = (index, originalTask) => {
-    const task = editTodoInput !== null ? editTodoInput : originalTask;
+  const handleToggleTodoDone = (item, index) => {
+    setTodoData(toggleTodoDone(todoData, item, index));
+  };
 
-    const updatedTask = { task, status: false };
-    console.log(updatedTask);
-
-    const newList = todoData.map((originalItem, i) => {
-      return i === index ? updatedTask : originalItem;
-    });
-
+  const handleEditTodo = (index, originalTask) => {
     setEditTodoInput(null);
-
     setEditMode(false);
-    setTodoData(newList);
+    setTodoData((todoData) => {
+      return updateTodoTask(editTodoInput, todoData, index, originalTask);
+    });
   };
 
   const isDisabled = () => {
@@ -88,61 +74,34 @@ const TodoList = () => {
 
   return (
     <>
-      <div>
-        <input ref={newTodoInput} type="text" disabled={isDisabled()} />
-        <button onClick={addNewTodo} disabled={isDisabled()}>
-          Add new todo
-        </button>
-      </div>
+      <NewTodoInput
+        handleAddNewTodo={handleAddNewTodo}
+        isDisabled={isDisabled}
+        newTodoInput={newTodoInput}
+      />
 
       <ul>
         {todoData.map((item, index) =>
           editMode === index ? (
-            <li key={index}>
-              <input
-                type="text"
-                value={editTodoInput === null ? item.task : editTodoInput}
-                onChange={(e) => setEditTodoInput(e.target.value)}
-              />
-              <button
-                onClick={() => {
-                  updateTodoTask(index, item.task);
-                }}
-              >
-                OK
-              </button>
-              <button>Cancel</button>
-            </li>
+            <TodoItemEditMode
+              key={`editItem_${index}`}
+              index={index}
+              handleEditTodo={handleEditTodo}
+              setEditTodoInput={setEditTodoInput}
+              editTodoInput={editTodoInput}
+              cancelEdit={cancelEdit}
+              task={item.task}
+            />
           ) : (
-            <li key={index}>
-              <span
-                onClick={() => {
-                  toggleTodoDone(item, index);
-                }}
-              >
-                <button disabled={isDisabled()}>Check</button>
-                <span className={!item.status ? "item_false" : "item_true"}>
-                  {item.task}
-                </span>
-              </span>
-
-              <button
-                onClick={() => {
-                  editTodo(index);
-                }}
-                disabled={isDisabled() | item.status}
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => {
-                  deleteTodo(index);
-                }}
-                disabled={isDisabled() | !item.status}
-              >
-                Delete
-              </button>
-            </li>
+            <TodoItem
+              item={item}
+              handleToggleTodoDone={handleToggleTodoDone}
+              isDisabled={isDisabled}
+              index={index}
+              editThisTodo={editThisTodo}
+              handleDeleteTodo={handleDeleteTodo}
+              editMode={editMode}
+            />
           )
         )}
       </ul>

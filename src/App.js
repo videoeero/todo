@@ -1,10 +1,12 @@
 import "./App.scss";
 import TodoList from "./components/TodoList/TodoList";
+import NewTodoInput from "./components/NewTodoInput/NewTodoInput";
 
 function App() {
   return (
     <section className="App">
       <h1>To Do</h1>
+
       <TodoList />
     </section>
   );
