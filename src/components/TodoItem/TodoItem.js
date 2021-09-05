@@ -13,16 +13,26 @@ const TodoItem = ({
 
   return (
     <li>
-      <span
-        onClick={() => {
-          handleToggleTodoDone(item, index);
-        }}
-      >
-        <button disabled={isDisabled()}>Check</button>
-        <span className={!status ? "item_false" : "item_true"}>{task}</span>
+      <span>
+        <input
+          checked={!status ? false : true}
+          type="checkbox"
+          id={`todo_${index}`}
+          disabled={isDisabled()}
+          onChange={() => {
+            handleToggleTodoDone(item, index);
+          }}
+        />
+        <label
+          className={!status ? "item_false" : "item_true"}
+          htmlFor={`todo_${index}`}
+        >
+          {task}
+        </label>
       </span>
 
       <button
+        aria-label={`Edit Todo ${task}`}
         onClick={() => {
           editThisTodo(index);
         }}
@@ -31,6 +41,7 @@ const TodoItem = ({
         Edit
       </button>
       <button
+        aria-label={`Delete Todo ${task}`}
         onClick={() => {
           handleDeleteTodo(index);
         }}

@@ -11,14 +11,17 @@ const TodoItemEditMode = ({
   return (
     <li>
       {console.log("rendered")}
+      <label htmlFor={`todo_${index}`}>Edit Todo</label>
       <input
         type="text"
+        id={`todo_${index}`}
         value={editTodoInput === null ? task : editTodoInput}
         onChange={(e) => setEditTodoInput(e.target.value)}
       />
       <button
-        onClick={() => {
-          handleEditTodo(index, task);
+        type="submit"
+        onClick={(e) => {
+          handleEditTodo(index, task, e);
         }}
       >
         OK

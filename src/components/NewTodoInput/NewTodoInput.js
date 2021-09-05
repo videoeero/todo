@@ -1,12 +1,27 @@
 import React from "react";
 
-const NewTodoInput = ({ handleAddNewTodo, isDisabled, newTodoInput }) => {
+const NewTodoInput = ({
+  handleAddNewTodo,
+  isDisabled,
+  newTodoInput,
+  editMode,
+}) => {
   return (
     <div>
-      <input ref={newTodoInput} type="text" disabled={isDisabled()} />
-      <button onClick={handleAddNewTodo} disabled={isDisabled()}>
-        Add new todo
-      </button>
+      <form>
+        <legend>Add new Todo</legend>
+        <input ref={newTodoInput} type="text" disabled={isDisabled()} />
+        <button
+          type="submit"
+          onClick={(e) => handleAddNewTodo(e)}
+          disabled={isDisabled()}
+        >
+          Add
+        </button>
+        <button type="reset" disabled={isDisabled()}>
+          Reset
+        </button>
+      </form>
     </div>
   );
 };
