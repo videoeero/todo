@@ -1,4 +1,7 @@
 import React from "react";
+import { Button } from "../Button/Button";
+
+import "./TodoItemEditMode.scss";
 
 const TodoItemEditMode = ({
   cancelEdit,
@@ -9,26 +12,29 @@ const TodoItemEditMode = ({
   index,
 }) => {
   return (
-    <li>
-      {console.log("rendered")}
-      <label htmlFor={`todo_${index}`}>Edit Todo</label>
-      <input
-        type="text"
-        id={`todo_${index}`}
-        value={editTodoInput === null ? task : editTodoInput}
-        onChange={(e) => setEditTodoInput(e.target.value)}
-      />
-      <button
-        //Setting disabled if Input is empty or changes are not made
-        disabled={!editTodoInput ? true : false}
-        type="submit"
-        onClick={(e) => {
-          handleEditTodo(index, task, e);
-        }}
-      >
-        OK
-      </button>
-      <button onClick={() => cancelEdit()}>Cancel</button>
+    <li className="todo__editMode">
+      <span className="todo__editMode__span">
+        <label htmlFor={`todo_${index}`}>Edit Todo</label>
+        <input
+          className="todo__input"
+          type="text"
+          id={`todo_${index}`}
+          value={editTodoInput === null ? task : editTodoInput}
+          onChange={(e) => setEditTodoInput(e.target.value)}
+        />
+      </span>
+      <span>
+        <Button
+          //Setting disabled if Input is empty or changes are not made
+          disabled={editTodoInput === "" ? true : false}
+          type="submit"
+          onClick={(event) => {
+            handleEditTodo(index, event);
+          }}
+          icon="editOk"
+        />
+        <Button icon="editCancel" onClick={() => cancelEdit()} />
+      </span>
     </li>
   );
 };

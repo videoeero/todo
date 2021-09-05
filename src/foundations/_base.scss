@@ -25,6 +25,14 @@ button {
   font-size: $default-font-size;
 }
 
+button,
+input {
+  transition: outline 0.1s;
+  &:focus {
+    outline: 3px solid $color-blue;
+  }
+}
+
 html,
 body {
   overflow-x: hidden;

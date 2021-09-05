@@ -1,0 +1,19 @@
+.todo__icon {
+  display: block;
+  height: 3rem;
+  width: 3rem;
+  color: black;
+  &__path {
+    display: block;
+    height: 3rem;
+    width: 3rem;
+    color: black;
+
+    &__delete {
+      fill: none;
+      stroke: #000;
+      stroke-linejoin: round;
+      stroke-width: 2px;
+    }
+  }
+}

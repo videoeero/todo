@@ -1,5 +1,6 @@
 import React from "react";
 import "./TodoItem.scss";
+import { Button } from "../Button/Button";
 
 const TodoItem = ({
   // Handler for toggling Todo done status
@@ -21,9 +22,10 @@ const TodoItem = ({
   const { task, status } = item;
 
   return (
-    <li>
-      <span>
+    <li className="todo__item">
+      <span className="todo__item__span">
         <input
+          className="todo__checkbox"
           checked={!status ? false : true}
           type="checkbox"
           id={`todo_${index}`}
@@ -33,31 +35,35 @@ const TodoItem = ({
           }}
         />
         <label
-          className={!status ? "item_false" : "item_true"}
+          className={
+            !status
+              ? "todo__label todo__label--notdone"
+              : "todo__label todo__label--done"
+          }
           htmlFor={`todo_${index}`}
         >
           {task}
         </label>
       </span>
+      <span className="todo__item__buttons">
+        <Button
+          aria-label={`Edit Todo ${task}`}
+          onClick={() => {
+            handleEditTodoByIndex(index);
+          }}
+          disabled={isDisabled() | status}
+          icon="edit"
+        />
 
-      <button
-        aria-label={`Edit Todo ${task}`}
-        onClick={() => {
-          handleEditTodoByIndex(index);
-        }}
-        disabled={isDisabled() | status}
-      >
-        Edit
-      </button>
-      <button
-        aria-label={`Delete Todo ${task}`}
-        onClick={() => {
-          handleDeleteTodo(index);
-        }}
-        disabled={isDisabled() | !status}
-      >
-        Delete
-      </button>
+        <Button
+          aria-label={`Delete Todo ${task}`}
+          onClick={() => {
+            handleDeleteTodo(index);
+          }}
+          disabled={isDisabled() | !status}
+          icon="delete"
+        />
+      </span>
     </li>
   );
 };

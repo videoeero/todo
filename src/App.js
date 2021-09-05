@@ -2,7 +2,7 @@ import "./foundations/main.scss";
 import TodoList from "./components/TodoList/TodoList";
 import React, { useState, useEffect, createRef } from "react";
 import addNewTodo from "./utils/addNewTodo";
-import NewTodoInput from "./components/NewTodoInput/NewTodoInput";
+import NewTodoForm from "./components/NewTodoForm/NewTodoForm";
 import {
   loadFromLocalStorage,
   saveToLocalStorage,
@@ -31,7 +31,6 @@ export const TodoApp = () => {
     // Fetch data from either LocalStorage or from a file
     const getTodoData = () => {
       if (loadFromLocalStorage() !== null) {
-        console.log("moi");
         setTodoData(loadFromLocalStorage());
       } else {
         fetch("/data/todos.json", {
@@ -86,8 +85,8 @@ export const TodoApp = () => {
 
   return (
     <section className="App">
-      <h1>To Do</h1>
-      <NewTodoInput
+      <h1 className="heading heading__h1">To Do</h1>
+      <NewTodoForm
         handleAddNewTodo={handleAddNewTodo}
         isDisabled={isDisabled}
         newTodoInput={newTodoInput}

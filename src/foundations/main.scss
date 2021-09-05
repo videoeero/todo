@@ -1,8 +1,10 @@
-@import "mixins";
-@import "variables";
-@import "base";
-@import "typography";
-@import "utilities";
+@import "./mixins";
+@import "./breakpoints";
+@import "./variables";
+@import "./base";
+@import "./formelements";
+@import "./typography";
+@import "./utilities";
 
 .App {
   width: 100vw;
@@ -10,7 +12,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px solid red;
 }
 
 button {

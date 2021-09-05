@@ -30,7 +30,7 @@ const TodoList = ({
 
   // Cancelling editing mode without updating changes
   const cancelEdit = () => {
-    // setEditTodoInput(null);
+    setEditTodoInput(null);
     handleEditTodoByIndex(false);
   };
 
@@ -40,8 +40,8 @@ const TodoList = ({
   };
 
   // Handler to update edited todo
-  const handleEditTodo = (index, originalTask, event) => {
-    // Preventing page refresh
+  const handleEditTodo = (index, event) => {
+    // Preventing page refresh on submit
     event.preventDefault();
 
     // Calling handler to set editing mode off
@@ -50,14 +50,14 @@ const TodoList = ({
     // Calling handler
     handleSetTodoData(updateTodoTask(editTodoInput, todoData, index));
 
-    // Reseting state of EditTodoinput
+    // // Reseting state of EditTodoinput
     setEditTodoInput(null);
   };
 
   return (
     <form>
-      <fieldset>
-        <legend>Your Todos</legend>
+      <fieldset className="todo__fieldset">
+        <legend className="todo__legend">Tasks to do</legend>
         {todoData.map((item, index) =>
           editTodoByIndex === index ? (
             <TodoItemEditMode

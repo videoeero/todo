@@ -1,0 +1,20 @@
+@import "../../foundations/variables";
+
+.todo {
+  &__item {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__span {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    &__buttons {
+    }
+  }
+}

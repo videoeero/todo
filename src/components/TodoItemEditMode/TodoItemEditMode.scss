@@ -1,0 +1,12 @@
+.todo__editMode {
+  list-style: none;
+  margin: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  &__span {
+    display: flex;
+    flex-direction: column;
+  }
+}

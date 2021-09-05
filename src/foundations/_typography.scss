@@ -1,0 +1,14 @@
+@mixin heading {
+  text-align: center;
+  display: inline-block;
+  color: $color-red;
+  text-transform: uppercase;
+}
+
+.heading {
+  @include heading;
+
+  &__h1 {
+    font-size: 5rem;
+  }
+}
