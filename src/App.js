@@ -1,4 +1,4 @@
-import "./App.scss";
+import "./foundations/main.scss";
 import TodoList from "./components/TodoList/TodoList";
 import React, { useState, useEffect, createRef } from "react";
 import addNewTodo from "./utils/addNewTodo";
@@ -17,7 +17,7 @@ const starterData = [
   { task: "I am done and you can delete me!", status: true },
 ];
 
-export const App = () => {
+export const TodoApp = () => {
   // Todo data as array of objects
   const [todoData, setTodoData] = useState([]);
 
@@ -111,4 +111,4 @@ export const App = () => {
   );
 };
 
-export default App;
+export default TodoApp;
