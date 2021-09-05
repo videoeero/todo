@@ -1,86 +1,49 @@
-import React, { useState, useEffect, createRef } from "react";
-import addNewTodo from "../../utils/addNewTodo";
+import React, { useState } from "react";
 import deleteTodo from "../../utils/deleteTodo";
 import toggleTodoDone from "../../utils/toggleTodoDone";
 import updateTodoTask from "../../utils/updateTodoTask";
-
 import TodoItemEditMode from "../TodoItemEditMode/TodoItemEditMode";
 import TodoItem from "../TodoItem/TodoItem";
-import NewTodoInput from "../NewTodoInput/NewTodoInput";
-
 import "./TodoList.scss";
 
-const TodoList = () => {
-  const [todoData, setTodoData] = useState([]);
-
-  const [editMode, setEditMode] = useState(false);
-
-  const newTodoInput = createRef();
-
+const TodoList = ({
+  todoData,
+  handleSetTodoData,
+  isDisabled,
+  handleEditMode,
+  editMode,
+}) => {
   const [editTodoInput, setEditTodoInput] = useState(null);
 
-  useEffect(() => {
-    console.log("App was rendered!");
-    getTodoData();
-  }, []);
-
-  const getTodoData = () => {
-    fetch("/data/todos.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (resultData) {
-        setTodoData(resultData.todos);
-      });
-  };
-
-  const handleAddNewTodo = () => {
-    setTodoData(addNewTodo(todoData, newTodoInput.current.value));
-    newTodoInput.current.value = "";
-  };
-
   const handleDeleteTodo = (itemIndexToRemoved) => {
-    setTodoData(deleteTodo(todoData, itemIndexToRemoved));
+    handleSetTodoData(deleteTodo(todoData, itemIndexToRemoved));
   };
 
   const editThisTodo = (index) => {
-    setEditMode(index);
+    handleEditMode(index);
   };
 
   const cancelEdit = () => {
-    setEditMode(false);
+    handleEditMode(false);
   };
 
   const handleToggleTodoDone = (item, index) => {
-    setTodoData(toggleTodoDone(todoData, item, index));
+    handleSetTodoData(toggleTodoDone(todoData, item, index));
   };
 
-  const handleEditTodo = (index, originalTask) => {
+  const handleEditTodo = (index, originalTask, event) => {
+    event.preventDefault();
     setEditTodoInput(null);
-    setEditMode(false);
-    setTodoData((todoData) => {
+    handleEditMode(false);
+    handleSetTodoData((todoData) => {
       return updateTodoTask(editTodoInput, todoData, index, originalTask);
     });
   };
 
-  const isDisabled = () => {
-    return editMode === false ? false : true;
-  };
-
   return (
-    <>
-      <NewTodoInput
-        handleAddNewTodo={handleAddNewTodo}
-        isDisabled={isDisabled}
-        newTodoInput={newTodoInput}
-      />
-
-      <ul>
+    <form>
+      <fieldset>
+        <legend>Your Todos</legend>
         {todoData.map((item, index) =>
           editMode === index ? (
             <TodoItemEditMode
@@ -94,18 +57,18 @@ const TodoList = () => {
             />
           ) : (
             <TodoItem
+              key={`editItem_${index}`}
               item={item}
               handleToggleTodoDone={handleToggleTodoDone}
               isDisabled={isDisabled}
               index={index}
               editThisTodo={editThisTodo}
               handleDeleteTodo={handleDeleteTodo}
-              editMode={editMode}
             />
           )
         )}
-      </ul>
-    </>
+      </fieldset>
+    </form>
   );
 };
 
