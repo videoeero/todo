@@ -1,9 +1,21 @@
 import "./App.scss";
 import TodoList from "./components/TodoList/TodoList";
-
 import React, { useState, useEffect, createRef } from "react";
 import addNewTodo from "./utils/addNewTodo";
 import NewTodoInput from "./components/NewTodoInput/NewTodoInput";
+import {
+  loadFromLocalStorage,
+  saveToLocalStorage,
+} from "./utils/localStorageUtils";
+
+const starterData = [
+  { task: "You can add more Todos by using input above", status: false },
+  {
+    task: "If you want to delete this Todo, you have to mark it first as done.",
+    status: false,
+  },
+  { task: "I am done and you can delete me!", status: true },
+];
 
 export const App = () => {
   // Todo data as array of objects
@@ -12,59 +24,64 @@ export const App = () => {
   // Adding ref to input field, so we can
   const newTodoInput = createRef();
 
-  const [editMode, setEditMode] = useState(false);
+  //Editing Todo at spesific index
+  const [editTodoByIndex, setEditTodoByIndex] = useState(false);
 
   useEffect(() => {
-    console.log("App was rendered!");
+    // Fetch data from either LocalStorage or from a file
+    const getTodoData = () => {
+      if (loadFromLocalStorage() !== null) {
+        console.log("moi");
+        setTodoData(loadFromLocalStorage());
+      } else {
+        fetch("/data/todos.json", {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (resultData) {
+            setTodoData(resultData.todos);
+          })
+          .catch((error) => {
+            console.error("Error while fetching data:", error);
+            setTodoData(starterData);
+          });
+      }
+    };
+
     getTodoData();
   }, []);
 
-  const getTodoData = () => {
-    if (loadFromLocalStorage()) {
-      setTodoData(loadFromLocalStorage());
-      return;
-    }
-
-    fetch("/data/todos.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (resultData) {
-        setTodoData(resultData.todos);
-      });
+  // Handler to set which Todo is being edited
+  const handleEditTodoByIndex = (newMode) => {
+    setEditTodoByIndex(newMode);
   };
 
-  const handleEditMode = (newMode) => {
-    setEditMode(newMode);
-  };
-
+  // Handler when user adds a new Todo
   const handleAddNewTodo = (event) => {
-    setTodoData(addNewTodo(todoData, newTodoInput.current.value));
-    saveToLocalStorage(addNewTodo(todoData, newTodoInput.current.value));
+    // Append added Todo to existing list and update state
+    handleSetTodoData(addNewTodo(todoData, newTodoInput.current.value));
+
+    // Prevent form submit from reloading page
     event.preventDefault();
+
+    // Reset input value
     newTodoInput.current.value = "";
   };
 
+  // Handler for updating Todos from TodoList component
   const handleSetTodoData = (newData) => {
+    saveToLocalStorage(newData);
     setTodoData(newData);
   };
 
+  // Helper to add disabled attribute to other inputs and buttons while editing one Todo
   const isDisabled = () => {
-    return editMode === false ? false : true;
-  };
-
-  const saveToLocalStorage = (todoData) => {
-    localStorage.setItem("localTodos", JSON.stringify(todoData));
-  };
-
-  const loadFromLocalStorage = () => {
-    const data = JSON.parse(localStorage.getItem("localTodos"));
-    return data;
+    return editTodoByIndex === false ? false : true;
   };
 
   return (
@@ -76,8 +93,8 @@ export const App = () => {
         newTodoInput={newTodoInput}
       />
       <TodoList
-        handleEditMode={handleEditMode}
-        editMode={editMode}
+        handleEditTodoByIndex={handleEditTodoByIndex}
+        editTodoByIndex={editTodoByIndex}
         isDisabled={isDisabled}
         todoData={todoData}
         handleSetTodoData={handleSetTodoData}

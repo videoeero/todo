@@ -4,40 +4,54 @@ import toggleTodoDone from "../../utils/toggleTodoDone";
 import updateTodoTask from "../../utils/updateTodoTask";
 import TodoItemEditMode from "../TodoItemEditMode/TodoItemEditMode";
 import TodoItem from "../TodoItem/TodoItem";
+
 import "./TodoList.scss";
 
 const TodoList = ({
+  // Todo data to display
   todoData,
+  //Handler for setting todos
   handleSetTodoData,
+  // Set form element disabled if needed
   isDisabled,
-  handleEditMode,
-  editMode,
+  // handler for setting single todo to editing mode
+  handleEditTodoByIndex,
+
+  // Prop for displaying todo at index to editing mode
+  editTodoByIndex,
 }) => {
+  // State to store what value is in textinput while editing
   const [editTodoInput, setEditTodoInput] = useState(null);
 
+  // Handler for deleting todos from list
   const handleDeleteTodo = (itemIndexToRemoved) => {
     handleSetTodoData(deleteTodo(todoData, itemIndexToRemoved));
   };
 
-  const editThisTodo = (index) => {
-    handleEditMode(index);
-  };
-
+  // Cancelling editing mode without updating changes
   const cancelEdit = () => {
-    handleEditMode(false);
+    // setEditTodoInput(null);
+    handleEditTodoByIndex(false);
   };
 
+  // Handler to toggle if Todo at certain index is done or not
   const handleToggleTodoDone = (item, index) => {
     handleSetTodoData(toggleTodoDone(todoData, item, index));
   };
 
+  // Handler to update edited todo
   const handleEditTodo = (index, originalTask, event) => {
+    // Preventing page refresh
     event.preventDefault();
+
+    // Calling handler to set editing mode off
+    handleEditTodoByIndex(false);
+
+    // Calling handler
+    handleSetTodoData(updateTodoTask(editTodoInput, todoData, index));
+
+    // Reseting state of EditTodoinput
     setEditTodoInput(null);
-    handleEditMode(false);
-    handleSetTodoData((todoData) => {
-      return updateTodoTask(editTodoInput, todoData, index, originalTask);
-    });
   };
 
   return (
@@ -45,7 +59,7 @@ const TodoList = ({
       <fieldset>
         <legend>Your Todos</legend>
         {todoData.map((item, index) =>
-          editMode === index ? (
+          editTodoByIndex === index ? (
             <TodoItemEditMode
               key={`editItem_${index}`}
               index={index}
@@ -62,7 +76,7 @@ const TodoList = ({
               handleToggleTodoDone={handleToggleTodoDone}
               isDisabled={isDisabled}
               index={index}
-              editThisTodo={editThisTodo}
+              handleEditTodoByIndex={handleEditTodoByIndex}
               handleDeleteTodo={handleDeleteTodo}
             />
           )

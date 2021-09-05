@@ -19,6 +19,8 @@ const TodoItemEditMode = ({
         onChange={(e) => setEditTodoInput(e.target.value)}
       />
       <button
+        //Setting disabled if Input is empty or changes are not made
+        disabled={!editTodoInput ? true : false}
         type="submit"
         onClick={(e) => {
           handleEditTodo(index, task, e);

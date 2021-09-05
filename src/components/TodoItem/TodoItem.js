@@ -2,11 +2,20 @@ import React from "react";
 import "./TodoItem.scss";
 
 const TodoItem = ({
+  // Handler for toggling Todo done status
   handleToggleTodoDone,
+  // Single todo data
   item,
+  // Index of this todo
   index,
+
+  // Set form element disabled if needed
   isDisabled,
-  editThisTodo,
+
+  // Call handler to set Todo to editing mode
+  handleEditTodoByIndex,
+
+  // Call handler to delete todo
   handleDeleteTodo,
 }) => {
   const { task, status } = item;
@@ -34,7 +43,7 @@ const TodoItem = ({
       <button
         aria-label={`Edit Todo ${task}`}
         onClick={() => {
-          editThisTodo(index);
+          handleEditTodoByIndex(index);
         }}
         disabled={isDisabled() | status}
       >

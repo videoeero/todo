@@ -1,5 +1,5 @@
-const updateTodoTask = (editTodoInput, todoData, index, originalTask) => {
-  const task = editTodoInput !== null ? editTodoInput : originalTask;
+const updateTodoTask = (editTodoInput, todoData, index) => {
+  const task = editTodoInput;
   const updatedTask = { task, status: false };
   const newList = todoData.map((originalItem, i) => {
     return i === index ? updatedTask : originalItem;
