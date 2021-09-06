@@ -2,27 +2,47 @@
 
 .newTodo {
   &__form {
-    margin: 3rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    border: 3px solid red;
+    margin-bottom: 5rem;
 
     &__elements {
+      width: 100%;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
     }
 
     &__input {
       position: relative;
+
+      & input {
+        width: 35rem;
+
+        &:focus + label {
+          transform: translate(-50%, -50%);
+          top: 160%;
+          left: 27%;
+        }
+      }
+
       &__label {
+        color: $color-gray;
         position: absolute;
         transform: translate(-50%, -50%);
         top: 50%;
-        left: 50%;
+        left: 27%;
         font-size: $default-font-size;
+        transition: all 0.3s;
+
+        &-moved {
+          transform: translate(-50%, -50%);
+          top: 160%;
+          left: 27%;
+        }
       }
     }
   }

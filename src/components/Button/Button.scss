@@ -1,6 +1,17 @@
+@import "../../foundations//variables";
+
 .button {
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: $default-font-size;
   font-size: 2rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 10px;
+
+  &:not(:last-of-type) {
+    margin-right: 1rem;
+  }
 }

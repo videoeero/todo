@@ -17,14 +17,6 @@ a:visited {
   font-size: $default-font-size;
 }
 
-button {
-  border: none;
-  cursor: pointer;
-  margin: 1rem;
-  font-weight: 700;
-  font-size: $default-font-size;
-}
-
 button,
 input {
   transition: outline 0.1s;

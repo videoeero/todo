@@ -3,6 +3,7 @@ import { Button } from "../Button/Button";
 import "./NewTodoForm.scss";
 
 const NewTodoInput = ({ handleAddNewTodo, isDisabled, newTodoInput }) => {
+  console.log(newTodoInput);
   return (
     <form className="newTodo__form">
       <legend className="todo__legend">Add new Todo</legend>

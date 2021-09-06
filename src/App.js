@@ -96,7 +96,7 @@ export const TodoApp = () => {
   return (
     <>
       <Header />
-      <section className="App">
+      <section className="todo__main">
         <NewTodoForm
           handleAddNewTodo={handleAddNewTodo}
           isDisabled={isDisabled}
