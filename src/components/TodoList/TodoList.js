@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import deleteTodo from "../../utils/deleteTodo";
 import toggleTodoDone from "../../utils/toggleTodoDone";
 import updateTodoTask from "../../utils/updateTodoTask";
@@ -19,10 +19,11 @@ const TodoList = ({
 
   // Prop for displaying todo at index to editing mode
   editTodoByIndex,
-}) => {
-  // State to store what value is in textinput while editing
-  const [editTodoInput, setEditTodoInput] = useState(null);
 
+  // To handle and track changes in Editing mode
+  handleEditTodoInputValue,
+  editTodoInputValue,
+}) => {
   // Handler for deleting todos from list
   const handleDeleteTodo = (itemIndexToRemoved) => {
     handleSetTodoData(deleteTodo(todoData, itemIndexToRemoved));
@@ -30,7 +31,7 @@ const TodoList = ({
 
   // Cancelling editing mode without updating changes
   const cancelEdit = () => {
-    setEditTodoInput(null);
+    handleEditTodoInputValue("");
     handleEditTodoByIndex(false);
   };
 
@@ -40,7 +41,7 @@ const TodoList = ({
   };
 
   // Handler to update edited todo
-  const handleEditTodo = (index, event) => {
+  const handleUpdateTodoTask = (index, event) => {
     // Preventing page refresh on submit
     event.preventDefault();
 
@@ -48,10 +49,10 @@ const TodoList = ({
     handleEditTodoByIndex(false);
 
     // Calling handler
-    handleSetTodoData(updateTodoTask(editTodoInput, todoData, index));
+    handleSetTodoData(updateTodoTask(editTodoInputValue, todoData, index));
 
-    // // Reseting state of EditTodoinput
-    setEditTodoInput(null);
+    // // Reseting state of EditTodoInputValue
+    handleEditTodoInputValue("");
   };
 
   return (
@@ -63,11 +64,11 @@ const TodoList = ({
             <TodoItemEditMode
               key={`editItem_${index}`}
               index={index}
-              handleEditTodo={handleEditTodo}
-              setEditTodoInput={setEditTodoInput}
-              editTodoInput={editTodoInput}
+              handleUpdateTodoTask={handleUpdateTodoTask}
+              handleEditTodoInputValue={handleEditTodoInputValue}
               cancelEdit={cancelEdit}
               task={item.task}
+              editTodoInputValue={editTodoInputValue}
             />
           ) : (
             <TodoItem

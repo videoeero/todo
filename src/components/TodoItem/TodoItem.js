@@ -9,13 +9,10 @@ const TodoItem = ({
   item,
   // Index of this todo
   index,
-
   // Set form element disabled if needed
   isDisabled,
-
   // Call handler to set Todo to editing mode
   handleEditTodoByIndex,
-
   // Call handler to delete todo
   handleDeleteTodo,
 }) => {
@@ -49,7 +46,7 @@ const TodoItem = ({
         <Button
           aria-label={`Edit Todo ${task}`}
           onClick={() => {
-            handleEditTodoByIndex(index);
+            handleEditTodoByIndex(index, task);
           }}
           disabled={isDisabled() | status}
           icon="edit"

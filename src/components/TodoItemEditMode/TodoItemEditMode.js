@@ -4,12 +4,18 @@ import { Button } from "../Button/Button";
 import "./TodoItemEditMode.scss";
 
 const TodoItemEditMode = ({
+  // Function to cancel editing
   cancelEdit,
-  editTodoInput,
-  task,
-  setEditTodoInput,
-  handleEditTodo,
+  // Prop value to track what value is in editing input
+  editTodoInputValue,
+  // To handle input changes
+  handleEditTodoInputValue,
+  // To update edited task to list of Todos
+  handleUpdateTodoTask,
+  // To track index of todo in list
   index,
+  // Original task before editing
+  task,
 }) => {
   return (
     <li className="todo__editMode">
@@ -19,17 +25,17 @@ const TodoItemEditMode = ({
           className="todo__input"
           type="text"
           id={`todo_${index}`}
-          value={editTodoInput === null ? task : editTodoInput}
-          onChange={(e) => setEditTodoInput(e.target.value)}
+          value={editTodoInputValue === undefined ? task : editTodoInputValue}
+          onChange={(e) => handleEditTodoInputValue(e.target.value)}
         />
       </span>
       <span>
         <Button
           //Setting disabled if Input is empty or changes are not made
-          disabled={editTodoInput === "" ? true : false}
+          disabled={editTodoInputValue === "" ? true : false}
           type="submit"
           onClick={(event) => {
-            handleEditTodo(index, event);
+            handleUpdateTodoTask(index, event);
           }}
           icon="editOk"
         />

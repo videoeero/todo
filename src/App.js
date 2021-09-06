@@ -27,6 +27,9 @@ export const TodoApp = () => {
   //Editing Todo at spesific index
   const [editTodoByIndex, setEditTodoByIndex] = useState(false);
 
+  // State to store what value is in textinput while editing
+  const [editTodoInputValue, setEditTodoInputValue] = useState(undefined);
+
   useEffect(() => {
     // Fetch data from either LocalStorage or from a file
     const getTodoData = () => {
@@ -56,8 +59,14 @@ export const TodoApp = () => {
   }, []);
 
   // Handler to set which Todo is being edited
-  const handleEditTodoByIndex = (newMode) => {
-    setEditTodoByIndex(newMode);
+  const handleEditTodoByIndex = (todoAtIndexToEdit, taskBeforeEditing) => {
+    setEditTodoInputValue(taskBeforeEditing);
+    setEditTodoByIndex(todoAtIndexToEdit);
+  };
+
+  // Handler to track user input in Todo edit field
+  const handleEditTodoInputValue = (inputValue) => {
+    setEditTodoInputValue(inputValue);
   };
 
   // Handler when user adds a new Todo
@@ -97,6 +106,8 @@ export const TodoApp = () => {
         isDisabled={isDisabled}
         todoData={todoData}
         handleSetTodoData={handleSetTodoData}
+        handleEditTodoInputValue={handleEditTodoInputValue}
+        editTodoInputValue={editTodoInputValue}
       />
 
       <button
