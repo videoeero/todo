@@ -1,12 +1,13 @@
-import "./foundations/main.scss";
-import TodoList from "./components/TodoList/TodoList";
 import React, { useState, useEffect, createRef } from "react";
-import addNewTodo from "./utils/addNewTodo";
+import TodoList from "./components/TodoList/TodoList";
 import NewTodoForm from "./components/NewTodoForm/NewTodoForm";
+import { Header } from "./components/Header/Header";
+import addNewTodo from "./utils/addNewTodo";
 import {
   loadFromLocalStorage,
   saveToLocalStorage,
 } from "./utils/localStorageUtils";
+import "./foundations/main.scss";
 
 const starterData = [
   { task: "You can add more Todos by using input above", status: false },
@@ -93,31 +94,33 @@ export const TodoApp = () => {
   };
 
   return (
-    <section className="App">
-      <h1 className="heading heading__h1">To Do</h1>
-      <NewTodoForm
-        handleAddNewTodo={handleAddNewTodo}
-        isDisabled={isDisabled}
-        newTodoInput={newTodoInput}
-      />
-      <TodoList
-        handleEditTodoByIndex={handleEditTodoByIndex}
-        editTodoByIndex={editTodoByIndex}
-        isDisabled={isDisabled}
-        todoData={todoData}
-        handleSetTodoData={handleSetTodoData}
-        handleEditTodoInputValue={handleEditTodoInputValue}
-        editTodoInputValue={editTodoInputValue}
-      />
+    <>
+      <Header />
+      <section className="App">
+        <NewTodoForm
+          handleAddNewTodo={handleAddNewTodo}
+          isDisabled={isDisabled}
+          newTodoInput={newTodoInput}
+        />
+        <TodoList
+          handleEditTodoByIndex={handleEditTodoByIndex}
+          editTodoByIndex={editTodoByIndex}
+          isDisabled={isDisabled}
+          todoData={todoData}
+          handleSetTodoData={handleSetTodoData}
+          handleEditTodoInputValue={handleEditTodoInputValue}
+          editTodoInputValue={editTodoInputValue}
+        />
 
-      <button
-        onClick={() => {
-          localStorage.clear();
-        }}
-      >
-        Clear Local Storage
-      </button>
-    </section>
+        <button
+          onClick={() => {
+            localStorage.clear();
+          }}
+        >
+          Clear Local Storage
+        </button>
+      </section>
+    </>
   );
 };
 

@@ -1,0 +1,18 @@
+@import "../../foundations/variables";
+
+.todo {
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 25rem;
+    background-color: $color-dark;
+
+    &__logo {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+}
