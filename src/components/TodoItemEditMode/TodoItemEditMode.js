@@ -19,7 +19,7 @@ const TodoItemEditMode = ({
 }) => {
   return (
     <li className="todo__editMode">
-      <span className="todo__editMode__span">
+      <span className="todo__editMode__input">
         <label htmlFor={`todo_${index}`}>Edit Todo</label>
         <input
           className="todo__input"
@@ -29,7 +29,7 @@ const TodoItemEditMode = ({
           onChange={(e) => handleEditTodoInputValue(e.target.value)}
         />
       </span>
-      <span>
+      <span className="todo__editMode__buttons">
         <Button
           //Setting disabled if Input is empty or changes are not made
           disabled={editTodoInputValue === "" ? true : false}

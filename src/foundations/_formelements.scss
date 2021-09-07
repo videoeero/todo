@@ -2,13 +2,14 @@
 
 .todo {
   &__fieldset {
-    border: 2px solid $color-red;
-    padding: 3rem;
+    border: none;
   }
 
   &__legend {
     @include heading;
     font-size: 4rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
   }
 
   &__checkbox,
