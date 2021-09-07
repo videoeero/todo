@@ -15,36 +15,32 @@
       display: inline-grid;
       align-items: center;
       justify-items: stretch;
-      grid-template-columns: auto 13rem;
+      grid-template-columns: $grid-column-size;
       column-gap: 1rem;
     }
 
     &__input {
       position: relative;
-
       & input {
         width: 100%;
-
-        &:focus + label {
-          transform: translate(-50%, -50%);
-          top: 160%;
-          left: 27%;
-        }
       }
 
       &__label {
         color: $color-gray;
         position: absolute;
         transform: translate(-50%, -50%);
+        white-space: nowrap;
         top: 50%;
-        left: 27%;
+        left: 28%;
         font-size: $default-font-size;
         transition: all 0.3s;
 
-        &-moved {
-          transform: translate(-50%, -50%);
+        @include respond(phone) {
+          left: 50%;
+        }
+
+        &--moved {
           top: 160%;
-          left: 27%;
         }
       }
     }

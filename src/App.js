@@ -96,13 +96,17 @@ export const TodoApp = () => {
           editTodoInputValue={editTodoInputValue}
         />
 
-        <button
-          onClick={() => {
-            localStorage.clear();
-          }}
-        >
-          Clear Local Storage
-        </button>
+        {process.env.NODE_ENV !== "production" ? (
+          <button
+            onClick={() => {
+              localStorage.clear();
+            }}
+          >
+            Clear Local Storage
+          </button>
+        ) : (
+          ""
+        )}
       </section>
     </>
   );

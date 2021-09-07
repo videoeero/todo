@@ -6,6 +6,7 @@ import addNewTodo from "../../utils/addNewTodo";
 const NewTodoInput = ({ handleSetTodoData, isDisabled, todoData }) => {
   // Adding ref to input field, so we can
   const newTodoInput = createRef();
+  const newTodoLabel = createRef();
 
   // Handler when user adds a new Todo
   const handleAddNewTodo = (event) => {
@@ -20,26 +21,46 @@ const NewTodoInput = ({ handleSetTodoData, isDisabled, todoData }) => {
 
     // Reset input value
     newTodoInput.current.value = "";
+
+    // Set focus back to input
+    newTodoInput.current.focus();
+
+    // Reset label style
+    isInputEmpty();
+  };
+
+  const isInputEmpty = () => {
+    if (newTodoInput.current?.value === "") {
+      newTodoLabel.current.className = "newTodo__form__input__label";
+    } else {
+      newTodoLabel.current.className = [
+        "newTodo__form__input__label newTodo__form__input__label--moved",
+      ];
+    }
   };
 
   return (
     <form className="newTodo__form">
-      <legend className="todo__legend">Add new Todo</legend>
+      <legend className="todo__legend">Add new task</legend>
       <div className="newTodo__form__elements">
         <div className="newTodo__form__input">
+          <label
+            ref={newTodoLabel}
+            className="newTodo__form__input__label"
+            id="newTodoLabel"
+            htmlFor="newTodo_input"
+          >
+            Type here your task!
+          </label>
           <input
             className="todo__input"
             ref={newTodoInput}
             type="text"
             disabled={isDisabled()}
             id="newTodo_input"
+            aria-labelledby="newTodoLabel"
+            onChange={isInputEmpty}
           />
-          <label
-            className="newTodo__form__input__label"
-            htmlFor="newTodo_input"
-          >
-            Type in your Todo!
-          </label>
         </div>
         <div className="newTodo__form__buttons">
           <Button

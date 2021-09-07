@@ -29,6 +29,10 @@
     max-width: 30rem;
     padding: 2rem;
 
+    @include respond(phone) {
+      padding: 1rem;
+    }
+
     &--done {
       color: $color-gray;
       text-decoration: line-through;

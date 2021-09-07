@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import React, { useEffect, createRef } from "react";
 import { Button } from "../Button/Button";
 
 import "./TodoItemEditMode.scss";
@@ -19,31 +19,38 @@ const TodoItemEditMode = ({
 }) => {
   const editTodoInput = createRef();
 
+  useEffect(() => {
+    // Set focus back to edit input
+    editTodoInput.current.focus();
+  }, [editTodoInput]);
+
   return (
-    <li className="todo__editMode">
-      <span className="todo__editMode__input">
-        <label htmlFor={`todo_${index}`}>Edit Todo</label>
-        <input
-          className="todo__input"
-          ref={editTodoInput}
-          type="text"
-          id={`todo_${index}`}
-          value={editTodoInputValue === undefined ? task : editTodoInputValue}
-          onChange={(e) => handleEditTodoInputValue(e.target.value)}
-        />
-      </span>
-      <span className="todo__editMode__buttons">
-        <Button
-          //Setting disabled if Input is empty or changes are not made
-          disabled={editTodoInputValue === "" ? true : false}
-          type="submit"
-          onClick={(event) => {
-            handleUpdateTodoTask(index, event);
-          }}
-          icon="editOk"
-        />
-        <Button icon="editCancel" onClick={() => cancelEdit()} />
-      </span>
+    <li>
+      <form className="todo__editMode">
+        <span className="todo__editMode__input">
+          <label htmlFor={`todo_${index}`}>Edit Todo</label>
+          <input
+            ref={editTodoInput}
+            className="todo__input"
+            type="text"
+            id={`todo_${index}`}
+            value={editTodoInputValue === undefined ? task : editTodoInputValue}
+            onChange={(e) => handleEditTodoInputValue(e.target.value)}
+          />
+        </span>
+        <span className="todo__editMode__buttons">
+          <Button
+            //Setting disabled if Input is empty or changes are not made
+            disabled={editTodoInputValue === "" ? true : false}
+            type="submit"
+            onClick={(event) => {
+              handleUpdateTodoTask(index, event);
+            }}
+            icon="editOk"
+          />
+          <Button icon="editCancel" onClick={() => cancelEdit()} />
+        </span>
+      </form>
     </li>
   );
 };

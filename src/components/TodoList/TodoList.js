@@ -56,7 +56,7 @@ const TodoList = ({
   };
 
   return (
-    <form className="todo__list">
+    <div className="todo__list">
       <fieldset className="todo__fieldset">
         <legend className="todo__legend">Tasks to do</legend>
         {todoData.map((item, index) =>
@@ -83,7 +83,7 @@ const TodoList = ({
           )
         )}
       </fieldset>
-    </form>
+    </div>
   );
 };
 
