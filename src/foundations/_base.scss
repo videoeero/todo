@@ -10,7 +10,7 @@
 a,
 a:link,
 a:visited {
-  color: $color-red;
+  color: $color-blue;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.3s;
@@ -21,14 +21,13 @@ button,
 input {
   transition: outline 0.1s;
   &:focus {
-    outline: 3px solid $color-blue;
+    outline: 3px solid $color-blue-dark;
   }
 }
 
 html,
 body {
   overflow-x: hidden;
-  // background-color: $color-platinum;
   background-color: $color-lighter;
   font-family: "Ubuntu", sans-serif;
   scroll-behavior: smooth;
@@ -70,6 +69,6 @@ body {
 }
 
 ::selection {
-  background-color: $color-red;
-  color: $color-platinum;
+  background-color: $color-blue;
+  color: $color-light;
 }

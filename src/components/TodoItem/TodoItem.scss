@@ -4,12 +4,20 @@
   &__item {
     list-style: none;
     width: 100%;
-
     display: inline-grid;
     align-items: center;
     justify-items: stretch;
     grid-template-columns: $grid-column-size;
     column-gap: 1rem;
+
+    &:not(:last-of-type) {
+      border-bottom: 3px solid $color-light;
+    }
+
+    &:not(:first-of-type),
+    &:not(:last-of-type) {
+      padding: 1rem 0;
+    }
 
     &__span {
       display: flex;

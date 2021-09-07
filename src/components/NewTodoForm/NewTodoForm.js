@@ -50,7 +50,7 @@ const NewTodoInput = ({ handleSetTodoData, isDisabled, todoData }) => {
             id="newTodoLabel"
             htmlFor="newTodo_input"
           >
-            Type here your task!
+            Type your task here!
           </label>
           <input
             className="todo__input"
@@ -64,12 +64,18 @@ const NewTodoInput = ({ handleSetTodoData, isDisabled, todoData }) => {
         </div>
         <div className="newTodo__form__buttons">
           <Button
+            aria-label="Add todo"
             type="submit"
             onClick={(e) => handleAddNewTodo(e)}
             disabled={isDisabled()}
             icon="add"
           />
-          <Button icon="delete" type="reset" disabled={isDisabled()} />
+          <Button
+            aria-label="Reset input"
+            icon="delete"
+            type="reset"
+            disabled={isDisabled()}
+          />
         </div>
       </div>
     </form>

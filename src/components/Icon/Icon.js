@@ -4,10 +4,12 @@ import "./Icon.scss";
 export const IconEdit = () => {
   return (
     <svg
+      aria-hidden="true"
       className="todo__icon"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 100 125"
+      viewBox="0 0 100 100"
     >
+      <span className="visually-hidden">Pencil icon</span>
       <switch>
         <g>
           <path
@@ -23,10 +25,12 @@ export const IconEdit = () => {
 export const IconAddTodo = () => {
   return (
     <svg
+      aria-hidden="true"
       className="todo__icon"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 14 17.5"
+      viewBox="0 0 14 14"
     >
+      <span className="visually-hidden">Plus sign</span>
       <path
         className="todo__icon__path"
         d="M7 0a1 1 0 01.993.883L8 1v5h5a1 1 0 01.117 1.993L13 8H8v5a1 1 0 01-1.993.117L6 13V8H1a1 1 0 01-.117-1.993L1 6h5V1a1 1 0 011-1z"
@@ -40,10 +44,12 @@ export const IconAddTodo = () => {
 export const IconEditOk = () => {
   return (
     <svg
+      aria-hidden="true"
       className="todo__icon"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 64 80"
+      viewBox="0 0 64 70"
     >
+      <span className="visually-hidden">Thumbs up icon</span>
       <path
         className="todo__icon__path"
         d="M52.73 29.77h-9.89a1.5 1.5 0 00-1.5 1.5v.09a15.355 15.355 0 01-6.78-3.45 11.128 11.128 0 01-2.96-8.28c0-1.68-1.83-3.44-3.85-3.69-1.29-.16-4.45.1-5.9 5.87a23.485 23.485 0 00-.25 7.36h-5.94a5.382 5.382 0 00-4.51 2.34c-1.3 1.83-2.34 5.44.05 12.22l2.69 9.7a6.249 6.249 0 006.15 5.07h7.25c2.68 0 9.78-.44 14.05-2.2v.51a1.5 1.5 0 001.5 1.5h9.89a1.5 1.5 0 001.5-1.5V31.27a1.5 1.5 0 00-1.5-1.5zM41.34 52.96c-2.2 1.48-8.92 2.54-14.05 2.54h-7.25a3.252 3.252 0 01-3.21-2.67l-.03-.14-2.72-9.81-.03-.1c-2.17-6.12-1.04-8.71-.45-9.54a2.394 2.394 0 012.06-1.07h7.65a1.472 1.472 0 001.14-.53 1.5 1.5 0 00.34-1.22c-.01-.04-.79-4.82-.03-7.88.56-2.23 1.47-3.59 2.43-3.63a1.76 1.76 0 011.41.8 14.032 14.032 0 003.84 10.32c2.74 2.74 6.83 3.95 8.9 4.42zM25.558 11.24V7a1.5 1.5 0 013 0v4.24a1.5 1.5 0 11-3 0zM33.5 16.4a1.5 1.5 0 01.512-2.058l3.634-2.187a1.5 1.5 0 111.547 2.57l-3.633 2.186a1.5 1.5 0 01-2.06-.511zm-19.09-3.734a1.5 1.5 0 012.058-.512l3.632 2.187a1.5 1.5 0 11-1.547 2.57l-3.635-2.187a1.5 1.5 0 01-.508-2.058z"
@@ -56,10 +62,12 @@ export const IconDelete = () => {
   return (
     <>
       <svg
+        aria-hidden="true"
         className="todo__icon"
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 64 80"
+        viewBox="0 0 64 64"
       >
+        <span className="visually-hidden">Trashcan icon</span>
         <path
           className="todo__icon__path__delete"
           d="M46 11h6a3 3 0 013 3v2H9v-2a3 3 0 013-3h7M51 11V7H13v4M44 11h-2M49 57H15l-4-41h42l-4 41zM22 7V3h20v4M15 57h34v4H15z"
@@ -76,10 +84,12 @@ export const IconDelete = () => {
 export const IconEditCancel = () => {
   return (
     <svg
+      aria-hidden="true"
       className="todo__icon"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 100 125"
+      viewBox="0 0 100 100"
     >
+      <span className="visually-hidden">Cancel icon</span>
       <switch>
         <g>
           <path
@@ -95,10 +105,12 @@ export const IconEditCancel = () => {
 export const IconDodo = () => {
   return (
     <svg
+      aria-hidden="true"
       className="todo__icon__dodo"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 100"
     >
+      <span className="visually-hidden">Dodo bird logo</span>
       <switch>
         <g>
           <path d="M77.4 45.2c-2.6-2.4-5.8-4.2-9.2-5.1-1.7-.5-3.5-.7-5.2-.7-1.8 0-3.5.1-5.2.5-3.4.8-6.6 2.4-9.2 4.6 2.8-2 6-3.4 9.4-4 1.7-.3 3.4-.4 5.1-.3 1.7.1 3.4.4 5 .9s3.2 1.1 4.6 2c1.5.8 2.8 1.9 4 3 1.2 1.1 2.3 2.4 3.2 3.8.7 1.1 1.4 2.3 1.9 3.6.2.4.2 1 0 1.4-.5 1.1-1 2.2-1.7 3.2-.9 1.3-1.9 2.4-3 3.4-2.3 2-5.1 3.5-8.1 4.1-3 .7-6.2.6-9.2-.3-3-.8-5.8-2.5-8-4.7 2.1 2.4 4.8 4.2 7.9 5.2 3 1 6.3 1.2 9.5.6 1.6-.3 3.1-.8 4.6-1.5 1.5-.7 2.8-1.6 4.1-2.7 3.2-2.7 4.7-6 5.3-7.5.2-.4.2-.9 0-1.3-.9-2-2.5-5.2-5.8-8.2z" />

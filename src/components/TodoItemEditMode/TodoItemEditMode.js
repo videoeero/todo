@@ -40,7 +40,7 @@ const TodoItemEditMode = ({
         </span>
         <span className="todo__editMode__buttons">
           <Button
-            //Setting disabled if Input is empty or changes are not made
+            aria-label="Update to do"
             disabled={editTodoInputValue === "" ? true : false}
             type="submit"
             onClick={(event) => {

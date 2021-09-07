@@ -21,12 +21,13 @@
 
     &__input {
       position: relative;
+
       & input {
         width: 100%;
       }
 
       &__label {
-        color: $color-gray;
+        color: $color-dark;
         position: absolute;
         transform: translate(-50%, -50%);
         white-space: nowrap;

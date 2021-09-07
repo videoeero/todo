@@ -59,29 +59,31 @@ const TodoList = ({
     <div className="todo__list">
       <fieldset className="todo__fieldset">
         <legend className="todo__legend">Tasks to do</legend>
-        {todoData.map((item, index) =>
-          editTodoByIndex === index ? (
-            <TodoItemEditMode
-              key={`editItem_${index}`}
-              index={index}
-              handleUpdateTodoTask={handleUpdateTodoTask}
-              handleEditTodoInputValue={handleEditTodoInputValue}
-              cancelEdit={cancelEdit}
-              task={item.task}
-              editTodoInputValue={editTodoInputValue}
-            />
-          ) : (
-            <TodoItem
-              key={`editItem_${index}`}
-              item={item}
-              handleToggleTodoDone={handleToggleTodoDone}
-              isDisabled={isDisabled}
-              index={index}
-              handleEditTodoByIndex={handleEditTodoByIndex}
-              handleDeleteTodo={handleDeleteTodo}
-            />
-          )
-        )}
+        <ul>
+          {todoData.map((item, index) =>
+            editTodoByIndex === index ? (
+              <TodoItemEditMode
+                key={`editItem_${index}`}
+                index={index}
+                handleUpdateTodoTask={handleUpdateTodoTask}
+                handleEditTodoInputValue={handleEditTodoInputValue}
+                cancelEdit={cancelEdit}
+                task={item.task}
+                editTodoInputValue={editTodoInputValue}
+              />
+            ) : (
+              <TodoItem
+                key={`editItem_${index}`}
+                item={item}
+                handleToggleTodoDone={handleToggleTodoDone}
+                isDisabled={isDisabled}
+                index={index}
+                handleEditTodoByIndex={handleEditTodoByIndex}
+                handleDeleteTodo={handleDeleteTodo}
+              />
+            )
+          )}
+        </ul>
       </fieldset>
     </div>
   );

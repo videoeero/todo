@@ -1,4 +1,4 @@
-@import "../../foundations//variables";
+@import "../../foundations/variables";
 
 .button {
   border: none;
@@ -10,6 +10,42 @@
   align-items: center;
   justify-content: center;
   padding: 10px;
+  background-color: $color-blue;
+  border-radius: 5px;
+  position: relative;
+  width: 6rem;
+  height: 6rem;
+  transition: all 0.2s;
+
+  &:disabled {
+    background-color: $color-light;
+    & .todo__icon {
+      color: $color-gray-2;
+      &__path {
+        fill: $color-gray-2;
+
+        &__delete {
+          stroke: $color-gray-2;
+        }
+      }
+    }
+  }
+
+  &:focus,
+  &:hover {
+    background-color: $color-blue-dark;
+
+    & .todo__icon {
+      color: $color-light;
+      &__path {
+        fill: $color-light;
+
+        &__delete {
+          stroke: $color-light;
+        }
+      }
+    }
+  }
 
   &:not(:last-of-type) {
     margin-right: 1rem;
