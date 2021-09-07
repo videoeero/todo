@@ -1,9 +1,27 @@
-import React from "react";
+import React, { createRef } from "react";
 import { Button } from "../Button/Button";
 import "./NewTodoForm.scss";
+import addNewTodo from "../../utils/addNewTodo";
 
-const NewTodoInput = ({ handleAddNewTodo, isDisabled, newTodoInput }) => {
-  console.log(newTodoInput);
+const NewTodoInput = ({ handleSetTodoData, isDisabled, todoData }) => {
+  // Adding ref to input field, so we can
+  const newTodoInput = createRef();
+
+  // Handler when user adds a new Todo
+  const handleAddNewTodo = (event) => {
+    // Append added Todo to existing list and update state
+
+    if (newTodoInput.current.value) {
+      handleSetTodoData(addNewTodo(todoData, newTodoInput.current.value));
+    } else alert("Your Todo input was empty, try again!");
+
+    // Prevent form submit from reloading page
+    event.preventDefault();
+
+    // Reset input value
+    newTodoInput.current.value = "";
+  };
+
   return (
     <form className="newTodo__form">
       <legend className="todo__legend">Add new Todo</legend>

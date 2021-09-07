@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef } from "react";
 import { Button } from "../Button/Button";
 
 import "./TodoItemEditMode.scss";
@@ -17,12 +17,15 @@ const TodoItemEditMode = ({
   // Original task before editing
   task,
 }) => {
+  const editTodoInput = createRef();
+
   return (
     <li className="todo__editMode">
       <span className="todo__editMode__input">
         <label htmlFor={`todo_${index}`}>Edit Todo</label>
         <input
           className="todo__input"
+          ref={editTodoInput}
           type="text"
           id={`todo_${index}`}
           value={editTodoInputValue === undefined ? task : editTodoInputValue}

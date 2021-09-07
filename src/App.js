@@ -1,8 +1,7 @@
-import React, { useState, useEffect, createRef } from "react";
+import React, { useState, useEffect } from "react";
 import TodoList from "./components/TodoList/TodoList";
 import NewTodoForm from "./components/NewTodoForm/NewTodoForm";
 import { Header } from "./components/Header/Header";
-import addNewTodo from "./utils/addNewTodo";
 import {
   loadFromLocalStorage,
   saveToLocalStorage,
@@ -21,9 +20,6 @@ const starterData = [
 export const TodoApp = () => {
   // Todo data as array of objects
   const [todoData, setTodoData] = useState([]);
-
-  // Adding ref to input field, so we can
-  const newTodoInput = createRef();
 
   //Editing Todo at spesific index
   const [editTodoByIndex, setEditTodoByIndex] = useState(false);
@@ -70,18 +66,6 @@ export const TodoApp = () => {
     setEditTodoInputValue(inputValue);
   };
 
-  // Handler when user adds a new Todo
-  const handleAddNewTodo = (event) => {
-    // Append added Todo to existing list and update state
-    handleSetTodoData(addNewTodo(todoData, newTodoInput.current.value));
-
-    // Prevent form submit from reloading page
-    event.preventDefault();
-
-    // Reset input value
-    newTodoInput.current.value = "";
-  };
-
   // Handler for updating Todos from TodoList component
   const handleSetTodoData = (newData) => {
     saveToLocalStorage(newData);
@@ -98,9 +82,9 @@ export const TodoApp = () => {
       <Header />
       <section className="todo__main">
         <NewTodoForm
-          handleAddNewTodo={handleAddNewTodo}
+          handleSetTodoData={handleSetTodoData}
           isDisabled={isDisabled}
-          newTodoInput={newTodoInput}
+          todoData={todoData}
         />
         <TodoList
           handleEditTodoByIndex={handleEditTodoByIndex}
