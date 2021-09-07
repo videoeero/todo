@@ -1,5 +1,6 @@
 @import "../../foundations/variables";
 @import "../../foundations/breakpoints";
+@import "../../foundations/mixins";
 
 .newTodo {
   &__form {
@@ -27,11 +28,9 @@
       }
 
       &__label {
+        @include absoluteCenter;
         color: $color-dark;
-        position: absolute;
-        transform: translate(-50%, -50%);
         white-space: nowrap;
-        top: 50%;
         left: 28%;
         font-size: $default-font-size;
         transition: all 0.3s;

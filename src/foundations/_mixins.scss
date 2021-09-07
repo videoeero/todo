@@ -1,0 +1,25 @@
+@mixin heading {
+  text-align: center;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+@mixin flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@mixin absoluteCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

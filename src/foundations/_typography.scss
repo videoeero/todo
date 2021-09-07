@@ -1,9 +1,3 @@
-@mixin heading {
-  text-align: center;
-  display: inline-block;
-  text-transform: uppercase;
-}
-
 .heading {
   @include heading;
 

@@ -1,16 +1,14 @@
 @import "../../foundations/variables";
 @import "../../foundations/breakpoints";
+@import "../../foundations/mixins";
 
 .todo__icon {
+  @include absoluteCenter;
   display: block;
   height: 3.2rem;
   width: 3.2rem;
   color: $color-dark;
   transition: all 0.2s;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
 
   &__path {
     color: $color-dark;

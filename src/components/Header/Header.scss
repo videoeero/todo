@@ -1,18 +1,14 @@
 @import "../../foundations/variables";
+@import "../../foundations/mixins";
 
 .todo {
   &__header {
+    @include flex-row;
     height: 25rem;
     background-color: $color-dark;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
     &__content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      @include flex-column;
       max-width: 90vw;
     }
 
