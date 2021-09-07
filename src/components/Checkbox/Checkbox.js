@@ -31,10 +31,6 @@ export const Checkbox = ({
       >
         {item.task}
       </label>
-
-      {/* <span className="todo__checkmark">
-        <IconCheck />
-      </span> */}
     </span>
   );
 };

@@ -4,14 +4,13 @@ import "./NewTodoForm.scss";
 import addNewTodo from "../../utils/addNewTodo";
 
 const NewTodoInput = ({ handleSetTodoData, isDisabled, todoData }) => {
-  // Adding ref to input field, so we can
+  // Adding ref to input field and it's label, so we can get the input value and also style label in "isInputEmpty()"
   const newTodoInput = createRef();
   const newTodoLabel = createRef();
 
-  // Handler when user adds a new Todo
+  // Handler when user adds a new To do
   const handleAddNewTodo = (event) => {
-    // Append added Todo to existing list and update state
-
+    // Add only if newTodoInput has some value
     if (newTodoInput.current.value) {
       handleSetTodoData(addNewTodo(todoData, newTodoInput.current.value));
     } else alert("Your Todo input was empty, try again!");
@@ -29,6 +28,7 @@ const NewTodoInput = ({ handleSetTodoData, isDisabled, todoData }) => {
     isInputEmpty();
   };
 
+  // Change CSS classes of label, if input has values
   const isInputEmpty = () => {
     if (newTodoInput.current?.value === "") {
       newTodoLabel.current.className = "newTodo__form__input__label";

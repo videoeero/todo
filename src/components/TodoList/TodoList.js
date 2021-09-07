@@ -51,7 +51,7 @@ const TodoList = ({
     // Calling handler
     handleSetTodoData(updateTodoTask(editTodoInputValue, todoData, index));
 
-    // // Reseting state of EditTodoInputValue
+    // Reseting state of EditTodoInputValue
     handleEditTodoInputValue("");
   };
 

@@ -20,7 +20,7 @@ const TodoItemEditMode = ({
   const editTodoInput = createRef();
 
   useEffect(() => {
-    // Set focus back to edit input
+    // Set focus to edit input when entering edit mode
     editTodoInput.current.focus();
   }, [editTodoInput]);
 
