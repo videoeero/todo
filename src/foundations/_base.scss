@@ -21,7 +21,7 @@ button,
 input {
   transition: outline 0.1s;
   &:focus {
-    outline: 3px solid $color-blue-dark;
+    outline: 5px solid $color-focus;
   }
 }
 

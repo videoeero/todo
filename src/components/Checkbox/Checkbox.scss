@@ -1,0 +1,75 @@
+@import "../../foundations/variables";
+@import "../../foundations/breakpoints";
+
+.todo {
+  &__checkbox {
+    opacity: 1;
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    left: 0;
+    opacity: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &:focus + .todo__label::before {
+      box-shadow: 0 0 0 5px $color-focus;
+      outline: 5px solid transparent;
+    }
+
+    &:checked + .todo__label::after {
+      opacity: 1;
+    }
+
+    &__container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+  }
+
+  &__label {
+    cursor: pointer;
+    font-size: $default-font-size;
+    padding: 1rem 1rem 1rem 6rem;
+    transition: all 0.2s;
+
+    &--done {
+      color: $color-gray;
+      text-decoration: line-through;
+    }
+
+    &--notdone {
+    }
+
+    &::before {
+      position: absolute;
+      content: "";
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+      border: 2px solid $color-blue;
+      height: 5rem;
+      width: 5rem;
+      transition: all 0.2s;
+    }
+
+    &::after {
+      content: "";
+      background-color: $color-blue-dark;
+      opacity: 0;
+      background-image: url("./done.svg");
+      background-repeat: no-repeat;
+      background-size: 80%;
+      background-position: center;
+      height: 5rem;
+      width: 5rem;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      transition: opacity 0.2s;
+    }
+  }
+}

@@ -17,18 +17,8 @@
   height: 6rem;
   transition: all 0.2s;
 
-  &:disabled {
-    background-color: $color-light;
-    & .todo__icon {
-      color: $color-gray-2;
-      &__path {
-        fill: $color-gray-2;
-
-        &__delete {
-          stroke: $color-gray-2;
-        }
-      }
-    }
+  &:not(:last-of-type) {
+    margin-right: 1rem;
   }
 
   &:focus,
@@ -47,7 +37,18 @@
     }
   }
 
-  &:not(:last-of-type) {
-    margin-right: 1rem;
+  &:disabled {
+    cursor: initial;
+    background-color: $color-light;
+    & .todo__icon {
+      color: $color-gray;
+      &__path {
+        fill: $color-gray;
+
+        &__delete {
+          stroke: $color-gray;
+        }
+      }
+    }
   }
 }
