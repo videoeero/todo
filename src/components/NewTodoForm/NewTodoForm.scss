@@ -9,7 +9,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    margin-bottom: 5rem;
+    margin-bottom: 6rem;
 
     &__elements {
       width: 100%;
@@ -31,7 +31,7 @@
         @include absoluteCenter;
         color: $color-dark;
         white-space: nowrap;
-        left: 28%;
+        left: 32%;
         font-size: $default-font-size;
         transition: all 0.3s;
 

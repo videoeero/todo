@@ -86,6 +86,7 @@ export const TodoApp = () => {
           isDisabled={isDisabled}
           todoData={todoData}
         />
+        <hr />
         <TodoList
           handleEditTodoByIndex={handleEditTodoByIndex}
           editTodoByIndex={editTodoByIndex}
