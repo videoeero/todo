@@ -30,8 +30,10 @@ export const TodoApp = () => {
   useEffect(() => {
     // Fetch data from either LocalStorage or from a file
     const getTodoData = () => {
-      if (loadFromLocalStorage() !== null) {
-        setTodoData(loadFromLocalStorage());
+      const localStorageData = loadFromLocalStorage();
+
+      if (localStorageData !== null) {
+        setTodoData(localStorageData.todos);
       } else {
         fetch("/data/todos.json", {
           headers: {
@@ -77,6 +79,8 @@ export const TodoApp = () => {
     return editTodoByIndex === false ? false : true;
   };
 
+  console.log(todoData);
+
   return (
     <>
       <Header />
@@ -87,15 +91,19 @@ export const TodoApp = () => {
           todoData={todoData}
         />
         <hr />
-        <TodoList
-          handleEditTodoByIndex={handleEditTodoByIndex}
-          editTodoByIndex={editTodoByIndex}
-          isDisabled={isDisabled}
-          todoData={todoData}
-          handleSetTodoData={handleSetTodoData}
-          handleEditTodoInputValue={handleEditTodoInputValue}
-          editTodoInputValue={editTodoInputValue}
-        />
+        {todoData !== undefined && todoData.length > 0 ? (
+          <TodoList
+            handleEditTodoByIndex={handleEditTodoByIndex}
+            editTodoByIndex={editTodoByIndex}
+            isDisabled={isDisabled}
+            todoData={todoData}
+            handleSetTodoData={handleSetTodoData}
+            handleEditTodoInputValue={handleEditTodoInputValue}
+            editTodoInputValue={editTodoInputValue}
+          />
+        ) : (
+          <p>No Tasks left!</p>
+        )}
 
         {process.env.NODE_ENV !== "production" ? (
           <button

@@ -1,24 +1,16 @@
 {
   "todos": [
     {
-      "task": "Buy ice cream",
+      "task": "You can add more Todos by using input above.",
       "status": false
     },
     {
-      "task": "Feed the dog",
+      "task": "If you want to delete this Todo, you have to mark it first as done.",
       "status": false
     },
     {
-      "task": "Call mom",
-      "status": false
-    },
-    {
-      "task": "Have a lunch",
-      "status": false
-    },
-    {
-      "task": "Buy movie tickets",
-      "status": false
+      "task": "I am done and you can delete me!",
+      "status": true
     }
   ]
 }
