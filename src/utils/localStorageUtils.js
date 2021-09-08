@@ -1,6 +1,11 @@
 // Save Todos to LocalStorage
 export const saveToLocalStorage = (todoData) => {
-  localStorage.setItem("localTodos", JSON.stringify(todoData));
+  const data = {
+    todos: todoData,
+    date: Date.now(),
+  };
+
+  localStorage.setItem("localTodos", JSON.stringify(data));
 };
 
 // Load Todos from LocalStorage

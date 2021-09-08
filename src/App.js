@@ -79,8 +79,6 @@ export const TodoApp = () => {
     return editTodoByIndex === false ? false : true;
   };
 
-  console.log(todoData);
-
   return (
     <>
       <Header />
