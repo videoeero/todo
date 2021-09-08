@@ -1,5 +1,4 @@
 import React from "react";
-import { IconCheck } from "../Icon/Icon";
 import "./Checkbox.scss";
 
 export const Checkbox = ({

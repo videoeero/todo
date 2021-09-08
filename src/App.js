@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TodoList from "./components/TodoList/TodoList";
 import NewTodoForm from "./components/NewTodoForm/NewTodoForm";
 import { Header } from "./components/Header/Header";
+import sendDataToServer from "./utils/sendDataToServer";
 import {
   loadFromLocalStorage,
   saveToLocalStorage,
@@ -19,7 +20,7 @@ const starterData = [
 
 export const TodoApp = () => {
   // Todo data as array of objects
-  const [todoData, setTodoData] = useState([]);
+  const [todoData, setTodoData] = useState([starterData]);
 
   //Editing Todo at spesific index
   const [editTodoByIndex, setEditTodoByIndex] = useState(false);
@@ -30,9 +31,14 @@ export const TodoApp = () => {
   useEffect(() => {
     // Fetch data from either LocalStorage or from a file
     const getTodoData = () => {
-      if (loadFromLocalStorage() !== null) {
-        setTodoData(loadFromLocalStorage());
-      } else {
+      const localStorageData = loadFromLocalStorage();
+
+      if (localStorageData !== null) {
+        setTodoData(localStorageData.todos);
+      }
+
+      // If running app on local machine,
+      if (process.env.REACT_APP_LOCAL) {
         fetch("/data/todos.json", {
           headers: {
             "Content-Type": "application/json",
@@ -43,11 +49,13 @@ export const TodoApp = () => {
             return response.json();
           })
           .then(function (resultData) {
-            setTodoData(resultData.todos);
+            console.log("käydään täällä");
+            if (resultData.date > localStorageData.date) {
+              setTodoData(resultData.todos);
+            }
           })
           .catch((error) => {
             console.error("Error while fetching data:", error);
-            setTodoData(starterData);
           });
       }
     };
@@ -68,7 +76,18 @@ export const TodoApp = () => {
 
   // Handler for updating Todos from TodoList component
   const handleSetTodoData = (newData) => {
-    saveToLocalStorage(newData);
+    const date = Date.now();
+    console.log("Sending date:" + date);
+
+    const dataToSend = {
+      todos: newData,
+      date: date,
+    };
+
+    saveToLocalStorage(dataToSend);
+    if (process.env.REACT_APP_LOCAL) {
+      sendDataToServer(dataToSend);
+    }
     setTodoData(newData);
   };
 
