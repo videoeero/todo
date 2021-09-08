@@ -56,7 +56,7 @@ const TodoList = ({
   };
 
   return (
-    <div className="todo__list">
+    <form className="todo__list">
       <fieldset className="todo__fieldset">
         <legend className="todo__legend">Tasks to do</legend>
         <ul>
@@ -85,7 +85,7 @@ const TodoList = ({
           )}
         </ul>
       </fieldset>
-    </div>
+    </form>
   );
 };
 

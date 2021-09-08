@@ -24,9 +24,15 @@ const TodoItemEditMode = ({
     editTodoInput.current.focus();
   }, [editTodoInput]);
 
+  const handleKeyPress = (index, event) => {
+    if ((event.key === "Enter") & (editTodoInput.current.value !== "")) {
+      handleUpdateTodoTask(index, event);
+    }
+  };
+
   return (
     <li>
-      <form className="todo__editMode">
+      <div className="todo__editMode">
         <span className="todo__editMode__input">
           <label htmlFor={`todo_${index}`}>Edit Todo</label>
           <input
@@ -36,6 +42,7 @@ const TodoItemEditMode = ({
             id={`todo_${index}`}
             value={editTodoInputValue === undefined ? task : editTodoInputValue}
             onChange={(e) => handleEditTodoInputValue(e.target.value)}
+            onKeyPress={(e) => handleKeyPress(index, e)}
           />
         </span>
         <span className="todo__editMode__buttons">
@@ -50,7 +57,7 @@ const TodoItemEditMode = ({
           />
           <Button icon="editCancel" onClick={() => cancelEdit()} />
         </span>
-      </form>
+      </div>
     </li>
   );
 };
