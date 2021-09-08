@@ -6,7 +6,7 @@ html {
 
 .heading {
   @include heading;
-  font-family: "Staatliches", cursive;
+  font-family: "Staatliches", sans-serif;
 
   &__h1 {
     font-size: 8rem;
