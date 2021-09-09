@@ -1,4 +1,4 @@
-# Do Dp App
+# Do Do To Do App
 
 Basic To do application which stores data from tasks to browser's local storage. Built on top of Create React App.
 
